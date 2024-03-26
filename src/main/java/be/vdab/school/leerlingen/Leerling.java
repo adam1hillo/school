@@ -22,4 +22,5 @@ public class Leerling {
     public String getFamilienaam() {
         return familienaam;
     }
+
 }
