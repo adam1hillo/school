@@ -1,5 +1,6 @@
 package be.vdab.school.lessen;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
@@ -11,8 +12,14 @@ import java.util.List;
 @Component
 public class LesRepository {
 
+    private final String pad;
+
+    public LesRepository(@Value("${lessenCsvPad}") String pad) {
+        this.pad = pad;
+    }
+
     public List<Les> findAll() {
-        try (var stream = Files.lines(Path.of("/data/lessen.csv"))) {
+        try (var stream = Files.lines(Path.of(pad))) {
             return stream
                     .map(regel -> regel.split(","))
                     .map(regelOnderdelen ->
